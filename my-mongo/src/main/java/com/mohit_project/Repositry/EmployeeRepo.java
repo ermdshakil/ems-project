@@ -40,9 +40,10 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 	    long countExitedEmployeeEmployees();
 	    
 	    Optional<Employee> findByEmailAndPassword(String email, String password);
-	    Optional<Employee> findByEmail(String email);
+	   // Optional<Employee> findByEmail(String email);
 //	    List<Employee> findByUsernameAndPassword(String username, String password);
 	    Optional<Employee> findByEmployeeId(Long employeeId);
+	Employee findByEmail(String email);
 
 
 	    

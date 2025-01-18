@@ -44,7 +44,7 @@ public class AuthEmployeeService {
 		logger.info("Authenticate employee for username:  {}", input.getEmail());
 		authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(input.getEmail(), input.getPassword()));
-		return empRepository.findByEmail(input.getEmail()).orElseThrow();
+		return empRepository.findByEmail(input.getEmail());
 	}
 
 
