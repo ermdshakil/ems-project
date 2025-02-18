@@ -39,10 +39,19 @@ public class AuthEmployeeService {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	public EmployeeDto signup(EmployeeDto employeeDto) {
-		Employee employee=this.modelMapper.map(employeeDto, Employee.class);
-		Employee createEmployee=this.empRepository.save(employee);
-		return this.modelMapper.map(createEmployee, EmployeeDto.class);
+	public Employee signup(EmployeeDto employeeDto) {
+		/*
+		 * Employee employee=this.modelMapper.map(employeeDto, Employee.class); Employee
+		 * createEmployee=this.empRepository.save(employee); return
+		 * this.modelMapper.map(createEmployee, EmployeeDto.class);
+		 */
+		Employee employee = new Employee();
+		employee.setName(employeeDto.getName());
+		employee.setEmail(employeeDto.getEmail());
+		employee.setPassword(passwordEncoder.encode(employeeDto.getPassword()));
+		//user.setPassword(input.getPassword());
+				
+		return empRepository.save(employee);
 	}
 
 	public Employee authenticate(LoginDto input) {
