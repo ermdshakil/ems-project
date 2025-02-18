@@ -2,6 +2,7 @@ package com.mohit_project.Security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,8 +27,10 @@ public class AuthEmployeeService {
 
 	private final AuthenticationManager authenticationManager;
 	private Logger logger = LoggerFactory.getLogger(OncePerRequestFilter.class);
-    
-
+    	
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	public AuthEmployeeService(EmployeeRepo empRepository, AuthenticationManager authenticationManager,
 			PasswordEncoder passwordEncoder) {
 		this.authenticationManager = authenticationManager;
@@ -35,9 +38,10 @@ public class AuthEmployeeService {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	public EmployeeDto signup(EmployeeDto registerEmpDto) {
-		// TODO Auto-generated method stub
-		return null;
+	public EmployeeDto signup(EmployeeDto employeeDto) {
+		Employee employee=this.modelMapper.map(employeeDto, Employee.class);
+		Employee createEmployee=this.empRepository.save(employee);
+		return this.modelMapper.map(createEmployee, EmployeeDto.class);
 	}
 
 	public Employee authenticate(LoginDto input) {
