@@ -32,8 +32,8 @@ public class AuthenticationEmpController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<EmployeeDto> register(@RequestBody EmployeeDto registerEmpDto) {
-        EmployeeDto registeredEmp = authenticationEmpService.signup(registerEmpDto);
+    public ResponseEntity<Employee> register(@RequestBody EmployeeDto registerEmpDto) {
+        Employee registeredEmp = authenticationEmpService.signup(registerEmpDto);
 
         return ResponseEntity.ok(registeredEmp);
     }
